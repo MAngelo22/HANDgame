@@ -1,0 +1,64 @@
+.contenedor { 
+    background-image: url(../media/fondo.jpg);
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+.container{
+    background-image: url(../media/fondo.jpg);
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.navbar {
+    background-image: url(../media/fondo.jpg);
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.navbar h1 {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+body {
+    background-image: url(../media/fondo.jpg);
+}
+
+div{
+    
+    background-image: url(../media/fondo.jpg);
+}
+
+ul{
+    
+    background-image: url(../media/fondo.jpg);
+}
+
+h2{
+    color:rgb(255, 0, 212);
+
+}
+h3 {
+    
+    background-image: url(../media/fondo.jpg);
+}
+
+h1{
+    color:rgb(64, 201, 219);
+}
