@@ -1,0 +1,120 @@
+nav {  
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    margin: 0;
+    padding: 10;
+    
+    display: flex;
+    justify-content: center;
+}
+
+
+.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-bar li {
+    float: left;
+}
+
+.nav-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.nav-bar li a:hover {
+    background-color: #111;
+}
+
+.navbar a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.navbar h1 {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+body {
+   /* background-image: url(/Mantrix/redel/media/pista/fondo.png);*/
+    background-color: rgba(0,0,0,10);
+    background-size: cover;
+    background-repeat:repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
+    margin: 0;
+}
+
+video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 105%;
+    min-height: 100%;
+    transform: translateX(calc((100% - 100vw) / 2));
+    z-index: -2;
+  }
+
+h2{
+    color:rgb(64, 201, 219);
+    
+  margin: 0;
+  padding-top: 3rem;
+  padding-left: 2rem;
+}
+h3 {
+    color:rgb(64, 201, 219);
+    
+  margin: 0;
+  padding-top: 3rem;
+  padding-left: 2rem;
+}
+
+h1{
+    color:rgb(64, 201, 219);
+    
+  margin: 0;
+  padding-top: 3rem;
+  padding-left: 2rem;
+}
+
+.cuadro {
+    width: auto;
+    min-height: auto;
+  }
+  #fieldset1,
+  #fieldset2 {
+    background-color: #03470e7d;
+    color: #000000;
+  }
+
+button {
+    font-size: medium; 
+    font-weight: bold; 
+    font-family: "Mantrix/redel/fonts/Hard Sports.ttf";
+    background-color: rgb(56, 56, 66); 
+    color: rgb(64, 201, 219);
+
+}
+
+legend{
+    
+    font-size: medium; 
+    font-weight: bold; /*
+    font-family: "Mantrix/redel/fonts/Hard Sports.ttf";
+    src: "Mantrix/redel/fonts/Hard Sports.ttf";
+    font-style: normal;*/
+    color: rgb(64, 201, 219);
+}

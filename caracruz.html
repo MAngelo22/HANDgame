@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caracruz</title>
+    <link rel="stylesheet" href="style/estilo.css">
+    <script type="text/javascript" src="Javascript/javascriptHandgame.js"></script>
+</head>
+<body>
+    <body id="body" style="
+    background-color:black;">
+      <nav id="navbar" class="navbar">
+        <div class="logo">
+          <a href="home.html">
+            <img
+              style="width: 200px; height: 200px"
+              class="centered-image"
+              src="media/arcade/logo.png"
+            />
+          </a>
+          <h1 style="color: azure; font-family: 'MiFuente'">HANDgame</h1>
+        </div>
+      </nav>
+      <hr style="background-color: black; color:aliceblue;" />
+      <h1> Cara o Cruz</h1>>
+      <h2 style="color: azure;">Reglas:</h2>
+      <h3 style="color: azure;">
+        Deberás elegir entre cara o cruz y despues lanzar la moneda.
+      </h3>
+      <br />
+      <hr  style="background-color: black; color:aliceblue;" />
+  
+      <div class="container" onload="CaraCruz()">
+        <div class="row" style="text-align: center;">
+          <div class="col-md-6" >
+            <button
+              style="
+                background: url('media/caraocruz/cara.png') no-repeat center
+                  center;
+                background-size: cover;
+                width: 250px;
+                height: 250px;
+                border: none;
+              "
+              id="btncara"
+              type="button"
+              name="eleccion"
+              value="cara"
+              onclick="CaraCruz(value)"
+            ></button>
+            <button
+            style="
+              background: url('media/caraocruz/cruz.png') no-repeat center
+                center;
+              background-size: cover;
+              width: 250px;
+              height: 250px;
+              border: none;
+            "
+            id="btncruz"
+            type="button"
+            name="eleccion"
+            value="cruz"
+            onclick="CaraCruz(value)"
+          ></button>
+          </div>
+          <hr>
+  
+</body>
+</html>

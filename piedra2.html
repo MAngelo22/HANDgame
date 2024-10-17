@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPTLS</title>
+    <link rel="stylesheet" href="style/estilo.css" />
+    <script
+      type="text/javascript"
+      src="Javascript/javascriptHandgame.js"
+    ></script>
+
+    <style>
+      @font-face {
+          font-family: 'FuenteArcade';
+          src: url('fonts/neonavy.ttf') format('truetype');
+      }
+      h1 {
+          font-family: 'MiFuente', sans-serif ;
+      }
+  </style>
+
+  </head>
+  <body id="body" style="
+  background-color:black;">
+    <nav id="navbar" class="navbar">
+      <div class="logo">
+        <a href="home.html">
+          <img
+            style="width: 200px; height: 200px"
+            class="centered-image"
+            src="media/arcade/logo.png"
+          />
+        </a>
+        <h1 style="color: azure; font-family: 'MiFuente'">HANDgame</h1>
+      </div>
+    </nav>
+    <hr style="background-color: black; color:aliceblue;" />
+    <img src="media/duelo pptls/titulo2.png" style="align-content: center; background-image: url('media/fondo.jpg');">
+    <h2 style="color: azure;">Reglas:</h2>
+    <h3 style="color: azure;">
+      Deberás elegir sabiamente que objeto utilizar para ganar a la IA o a un
+      contrincante.
+    </h2>
+    <ul style="color: azure;">
+        <li>Tijera corta Papel</li>
+        <li>Papel tapa Piedra</li>
+      <li>Piedra aplasta Lagarto</li>
+      <li>Lagarto Envenena a Spock</li>
+      <li>Spock rompe Tijeras</li>
+      <li>Tijeras decapitan Lagarto</li>
+      <li>Lagarto devora Papel</li>
+      <li>Papel desautoriza Spock</li>
+      <li>Spock vaporiza Piedra</li>
+      <li>Piedra aplasta Tijera</li>      
+    </ul>
+    <br />
+    <hr  style="background-color: black; color:aliceblue;" />
+
+    <div class="container" onload="piedra2()">
+      <div class="row" style="text-align: center;">
+        <div class="col-md-6" >
+          <button
+            style="
+              background: url('media/duelo pptls/piedra.png') no-repeat center
+                center;
+              background-size: cover;
+              width: 250px;
+              height: 250px;
+              border: none;
+            "
+            id="piedrabtn"
+            type="button"
+            name="eleccion"
+            value="piedra"
+            onclick="piedra2(value)"
+            ></button>
+
+          <button
+            style="
+              background: url('media/duelo pptls/logos/papel\ 2.png') no-repeat center
+                center;
+              background-size: cover;
+              width: 300px;
+              height: 250px;
+              border: none;
+            "
+            id="papelbtn"
+            type="button"
+            name="eleccion"
+            value="papel"
+            onclick="piedra2(value)"
+          ></button>
+
+          <button
+            style="
+              background: url('media/duelo pptls/logos/tijera.png') no-repeat center
+                center;
+              background-size: cover;
+              width: 250px;
+              height: 250px;
+              border: none;
+            "
+            id="tijerabtn"
+            type="button"
+            name="eleccion"
+            value="tijera"
+            onclick="piedra2(value)"
+          ></button>
+
+          <button
+          style="
+            background: url('media/duelo pptls/logos/lagarto.png') no-repeat center
+              center;
+            background-size: cover;
+            width: 250px;
+            height: 250px;
+            border: none;
+          "
+          id="lagartobtn"
+          type="button"
+          name="eleccion"
+          value="lagarto"
+          onclick="piedra2(value)"
+        ></button>
+
+        <button
+            style="
+              background: url('media/duelo pptls/logos/spok.png') no-repeat center
+                center;
+              background-size: cover;
+              width: 250px;
+              height: 250px;
+              border: none;
+            "
+            id="spockbtn"
+            type="button"
+            name="eleccion"
+            value="spock"
+            onclick="piedra2(value)"
+          ></button>
+        
+        </div>
+
+    <div id="divp1" class="container"></div>
+  </body>
+</html>
