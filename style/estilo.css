@@ -1,0 +1,144 @@
+/* Reset del margen y padding */
+nav {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos para fieldset */
+fieldset {
+    margin: 0;
+    padding: 10px;
+}
+
+/* Navegación */
+.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* Cambiado a columna para móviles */
+    align-items: center; /* Centrar elementos */
+}
+
+.nav-bar .logo {
+    display: flex;
+    flex-direction: column; /* Apilar logo y título */
+    align-items: center; /* Centrar contenido */
+}
+
+/* Estilos para los elementos de la barra de navegación */
+.nav-bar li {
+    margin: 5px; /* Espacio entre elementos */
+}
+
+.nav-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.nav-bar li a:hover {
+    background-color: #111;
+}
+
+/* Efecto hover */
+.navbar a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.navbar h1 {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+body {
+    background-image: url(../media/arcade.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat; /* Cambiado a no-repeat */
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+h2 {
+    color: rgb(255, 0, 212);
+}
+
+h3 {
+    color: rgb(255, 0, 212);
+}
+
+h1 {
+    color: rgb(64, 201, 219);
+}
+
+button {
+    font-size: medium; 
+    font-weight: bold; 
+    font-family: "../fonts/neonavy.ttf";
+    background-color: rgb(255, 0, 212); 
+    color: aqua;
+}
+
+/* Estilos para las opciones del juego */
+.game-options {
+    display: flex; /* Usar flexbox para las opciones del juego */
+    flex-wrap: wrap; /* Permitir que las imágenes se envuelvan */
+    justify-content: center; /* Centrar elementos */
+    padding: 0; /* Quitar padding */
+}
+
+.game-options li {
+    display: flex; /* Cambiar a flex para alineación */
+    flex-direction: column; /* Apilar íconos verticalmente */
+    align-items: center; /* Centrar imágenes */
+    margin: 10px; /* Espacio entre las opciones */
+}
+
+/* Media queries para hacer el menú responsive */
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column; /* Mantener en columna */
+        align-items: center; /* Centrar los elementos en la columna */
+    }
+
+    .nav-bar li {
+        width: 100%; /* Cada elemento de la lista ocupa el ancho completo */
+        margin: 5px 0; /* Espacio vertical entre elementos */
+    }
+
+    .nav-bar li a {
+        padding: 12px; /* Reduce el padding en pantallas más pequeñas */
+        width: 100%; /* Botones ocupan el ancho completo */
+        text-align: center; /* Alinear texto al centro */
+    }
+
+    .game-options {
+        flex-direction: column; /* Coloca las opciones del juego en columna */
+        align-items: center; /* Centra las imágenes */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px; /* Reduce el tamaño del encabezado en pantallas pequeñas */
+    }
+
+    h2, h3 {
+        font-size: 18px; /* Reduce el tamaño de los subtítulos */
+    }
+
+    button {
+        font-size: small; /* Reduce el tamaño del botón */
+    }
+}
