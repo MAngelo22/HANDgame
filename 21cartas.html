@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +7,45 @@
     <link rel="stylesheet" href="style/estilo.css">
     <script type="text/javascript" src="Javascript/javascriptHandgame.js"></script>
 </head>
-<body>
-    <nav id="navbar">
-        <div class="logo">
-            <a href="home.html">
-            <img style="width:100px;height:100px;"class="centered-image" src="media/arcade/logo2.jpeg">
-            </a>
-        </div>
-    </nav>
+<body onload="blackjackNewGame()">
+    <div class="page">
+        <nav id="navbar" class="navbar">
+            <div class="logo">
+                <a href="home.html">
+                    <img class="centered-image" src="media/arcade/logo2.jpeg" alt="Logo HANDgame">
+                </a>
+                <h1>BlackJack 21</h1>
+            </div>
+        </nav>
 
-    <h1>BlackJack</h1>
+        <section class="panel info-block">
+            <h2>Reglas clasicas</h2>
+            <p>Pide cartas para acercarte a 21 sin pasarte. La banca roba hasta 17.</p>
+        </section>
+
+        <section class="panel bj-table">
+            <div class="bj-row">
+                <h3>Banca (<span id="bj-dealer-score">0</span>)</h3>
+                <div id="bj-dealer-cards" class="bj-cards"></div>
+            </div>
+
+            <div class="bj-row">
+                <h3>Jugador (<span id="bj-player-score">0</span>)</h3>
+                <div id="bj-player-cards" class="bj-cards"></div>
+            </div>
+
+            <p id="bj-status" class="bj-status">Nueva ronda.</p>
+
+            <div class="bj-controls">
+                <button id="bj-hit-btn" type="button" onclick="blackjackHit()">Pedir</button>
+                <button id="bj-stand-btn" type="button" onclick="blackjackStand()">Parar</button>
+                <button type="button" onclick="blackjackNewGame()">Nueva ronda</button>
+            </div>
+        </section>
+
+        <div class="home-cta">
+            <a class="home-button" href="home.html">Volver al home</a>
+        </div>
+    </div>
 </body>
 </html>

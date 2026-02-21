@@ -1,22 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monkey</title>
-    <link rel="stylesheet" href="style/estilo.css">
-    <script type="text/javascript" src="Javascript/monkey.js"></script>
+    <title>Monkey - Club del Gesto Fantasma</title>
+    <link rel="stylesheet" href="style/monkey-adventure.css">
 </head>
-<body class="contenedor" onload"monkey()" >
-    <nav id="navbar">
-        <div class="logo">
-            <a href="home.html">
-            <img style="width:100px;height:100px;"class="centered-image" src="media/arcade/logo2.png">
-            </a>
-        </div>
-    </nav>
-    <h1>Monkey Island</h1>
-    <h3>Como bien pone en el nombre, este es un juego de habilidad que se integro en el famoso juego de Electronic Arts "Monkey Island", no revelere el secreto, pero debeis adivinar como resolver el juego (en el juego de EA se podia acceder a un lugar secreto si se sabia el truco)</h3>
+<body>
+    <div class="game-shell">
+        <header class="topbar">
+            <a class="home-link" href="home.html">Volver al home</a>
+            <h1>Club del Gesto Fantasma</h1>
+            <div class="scoreboard">
+                <span>Ronda: <strong id="round">1</strong></span>
+                <span>Puntos: <strong id="score">0</strong></span>
+                <span>Racha: <strong id="streak">0</strong></span>
+            </div>
+        </header>
 
+        <main class="layout">
+            <section class="scene-card">
+                <div class="scene-sky"></div>
+                <div class="scene-ground"></div>
+                <div class="scene-sign">Club secreto de piratas</div>
+                <div class="scene-characters">
+                    <div class="pirate pirate-a"></div>
+                    <div class="pirate pirate-b"></div>
+                </div>
+                <p class="scene-text">
+                    Bruma te enseña dos gestos. El truco del club es absurdo: el valor real del segundo gesto
+                    siempre es el numero de dedos del primer gesto.
+                </p>
+            </section>
+
+            <section class="challenge-card">
+                <h2>Desafio del Guante</h2>
+                <p id="phase-text" class="phase-text">Memoriza el primer gesto...</p>
+
+                <div class="hands-row">
+                    <div class="hand-slot">
+                        <h3>Gesto 1</h3>
+                        <div id="hand-one" class="hand-board"></div>
+                    </div>
+                    <div class="hand-slot">
+                        <h3>Gesto 2</h3>
+                        <div id="hand-two" class="hand-board hidden-hand"></div>
+                    </div>
+                </div>
+
+                <div id="question-box" class="question-box hidden">
+                    <p>¿Que valor tiene el gesto 2?</p>
+                    <div id="answers" class="answers"></div>
+                </div>
+
+                <p id="feedback" class="feedback"></p>
+
+                <div class="actions">
+                    <button id="next-round" type="button" disabled>Siguiente ronda</button>
+                    <button id="restart" type="button">Reiniciar partida</button>
+                </div>
+
+                <div class="history-wrap">
+                    <h3>Ultimas rondas</h3>
+                    <ul id="history"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="Javascript/monkey-adventure/main.js"></script>
 </body>
 </html>

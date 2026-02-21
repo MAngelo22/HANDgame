@@ -5,52 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HANDgame</title>
     <link rel="stylesheet" href="style/estilo.css">
-    <script type="text/javascript" src="Javascript/javascriptHandgame.js"></script>
 </head>
-<body id="body" onload="cargarDOM()">
-    
-    <nav id="navbar">
-        <ul class="nav-bar">
+<body>
+    <div class="page">
+        <nav id="navbar" aria-label="Principal">
             <div class="logo">
-                <li>
-                    <a href="home.html">
-                        <img class="centered-image" src="media/arcade/logo.png" alt="Logo" style="width:150px;height:150px;">
-                    </a>
-                </li>
-                <li><h1> Bienvenido a Hand Game</h1></li>
+                <a href="home.html">
+                    <img class="centered-image" src="media/arcade/logo.png" alt="Logo HANDgame">
+                </a>
+                <h1>Bienvenido a HANDgame</h1>
             </div>
-        </ul>
-    </nav>
-    
-    <div id="div1" class="container">
-        <fieldset>
-            <legend style="color: aqua;">Elegir Juego</legend>
-            <ul class="game-options">
-                <li>
-                    <a href="piedra1.html">
-                        <img src="media/fondosBtn/ppt.jpg" alt="Piedra Papel o Tijera" style="width: 90px; height: 90px;">
+        </nav>
+
+        <section class="panel info-block">
+            <h2>Disfrutaras de los juegos clasicos</h2>
+            <p>Elige el juego que quieras iniciar.</p>
+        </section>
+
+        <div class="container">
+            <fieldset>
+                <legend>Elegir juego</legend>
+                <div class="game-grid">
+                    <a class="game-card" href="piedra1.html">
+                        <img src="media/fondosBtn/ppt.jpg" alt="Piedra Papel o Tijera">
+                        <span>Piedra Papel Tijera</span>
                     </a>
-                    <a href="piedra2.html">
-                        <img src="media/fondosBtn/OIG2.jpeg" alt="Piedra Papel Tijera Lagarto Spock" style="width: 90px; height: 90px;">
+                    <a class="game-card" href="piedra2.html">
+                        <img src="media/fondosBtn/OIG2.jpeg" alt="Piedra Papel Tijera Lagarto Spock">
+                        <span>PPT Lagarto Spock</span>
                     </a>
-                    <a href="21cartas.html">
-                        <img src="media/fondosBtn/21.jpeg" alt="BlackJack" style="width: 90px; height: 90px;">
+                    <a class="game-card" href="21cartas.html">
+                        <img src="media/fondosBtn/21.jpeg" alt="BlackJack 21">
+                        <span>BlackJack</span>
                     </a>
-                </li>
-                <li>
-                    <a href="caracruz.html">
-                        <img src="media/fondosBtn/cara.jpeg" alt="Cara o Cruz" style="width: 90px; height: 90px;">
+                    <a class="game-card" href="caracruz.html">
+                        <img src="media/fondosBtn/cara.jpeg" alt="Cara o Cruz">
+                        <span>Cara o Cruz</span>
                     </a>
-                    <a href="Vaqueros.html">
-                        <img src="media/fondosBtn/psitol.jpeg" alt="Pistolero" style="width: 90px; height: 90px;">
+                    <a class="game-card" href="Vaqueros.html">
+                        <img src="media/fondosBtn/psitol.jpeg" alt="Pistolero">
+                        <span>Pistolero</span>
                     </a>
-                    <a href="Monkey.html">
-                        <img src="media/fondosBtn/mi.jpeg" alt="Monkey" style="width: 90px; height: 90px;">
+                    <a class="game-card" href="Monkey.html">
+                        <img src="media/fondosBtn/mi.jpeg" alt="Monkey Island">
+                        <span>Monkey Island</span>
                     </a>
-                </li>
-            </ul>
-        </fieldset>
+                </div>
+            </fieldset>
+        </div>
     </div>
-    
 </body>
 </html>

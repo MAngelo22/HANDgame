@@ -1,21 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaqueros</title>
     <link rel="stylesheet" href="style/estilo.css">
     <script type="text/javascript" src="Javascript/javascriptHandgame.js"></script>
-
 </head>
-<body>
-    <nav id="navbar">
-        <div class="logo">
-            <a href="home.html">
-            <img style="width:100px;height:100px;"class="centered-image" src="media/arcade/logo2.jpeg">
-            </a>
-        </div>
-    </nav>
-    <h1>Pistolero</h1>
+<body onload="resetVaqueros()">
+    <div class="page">
+        <nav id="navbar" class="navbar">
+            <div class="logo">
+                <a href="home.html">
+                    <img class="centered-image" src="media/arcade/logo2.jpeg" alt="Logo HANDgame">
+                </a>
+                <h1>Pistolero</h1>
+            </div>
+        </nav>
+
+        <section class="panel info-block">
+            <h2>Duelo de Vaqueros</h2>
+            <p>Elige tu gesto al mismo tiempo que la IA.</p>
+            <ul>
+                <li>Disparo gana a Recarga.</li>
+                <li>Recarga gana a Escudo.</li>
+                <li>Escudo gana a Disparo.</li>
+                <li>No puedes disparar si no tienes el arma cargada.</li>
+            </ul>
+        </section>
+
+        <section class="panel">
+            <div class="vaq-hud">
+                <div class="vaq-side">
+                    <h3>Jugador</h3>
+                    <p>Puntos: <strong id="vaq-player-score">0</strong></p>
+                    <div id="vaq-player-ammo" class="ammo-indicator"></div>
+                </div>
+                <div class="vaq-side">
+                    <h3>IA</h3>
+                    <p>Puntos: <strong id="vaq-ai-score">0</strong></p>
+                    <div id="vaq-ai-ammo" class="ammo-indicator"></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="choice-button" style="background-image: url('media/vaqueros/recarga1.jpeg');" type="button" value="recarga" onclick="vaqueros(value)" aria-label="Elegir Recarga"></button>
+                <button id="vaq-shoot-btn" class="choice-button" style="background-image: url('media/vaqueros/disparo.gif');" type="button" value="disparo" onclick="vaqueros(value)" aria-label="Elegir Disparo"></button>
+                <button class="choice-button" style="background-image: url('media/vaqueros/escudo1.jpeg');" type="button" value="escudo" onclick="vaqueros(value)" aria-label="Elegir Escudo"></button>
+            </div>
+            <p id="vaq-status" class="bj-status">Arma descargada. Recarga para poder disparar.</p>
+            <div class="bj-controls">
+                <button type="button" onclick="resetVaqueros()">Reiniciar duelo</button>
+            </div>
+            <div id="result"></div>
+            <div class="home-cta">
+                <a class="home-button" href="home.html">Volver al home</a>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

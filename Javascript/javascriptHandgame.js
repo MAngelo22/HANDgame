@@ -62,6 +62,19 @@ var colorneonazul = "color: rgb(64, 201, 219); justify-content: center;";
 
 var SaltoLinea = document.createElement("br"); // Se declara los saltos de linea
 
+function getResultContainer() {
+  var result = document.getElementById("result");
+  if (!result) {
+    result = document.createElement("div");
+    result.setAttribute("id", "result");
+    var mountPoint = document.querySelector(".page") || document.body;
+    mountPoint.appendChild(result);
+  }
+
+  result.innerHTML = "";
+  return result;
+}
+
 function cargarDOM() {
   //generamos div1 en el body
   document.body.appendChild(div1);
@@ -194,14 +207,8 @@ function piedra1(eleccionJ1) {
   console.log("La IA a seleccionado " + selecionIA);
   //declaracion de mensajes
   var img = document.createElement("img");
-  var divPPT = document.createElement("div");
+  var divPPT = getResultContainer();
   var h1 = document.createElement("h1");
-  document.body.appendChild(divPPT);
-  divPPT.setAttribute("id", "result");
-  divPPT.setAttribute(
-    "style",
-    "text-align: center; color:" + colorneonazul + ";" + "font-size:50px;"
-  );
   //------------------------------------------------------------------------------
   //Funcionamiento del juego
   let result = "";
@@ -224,11 +231,11 @@ function piedra1(eleccionJ1) {
   var contenidoh1 = document.createTextNode(mensaje);
 
   h1.appendChild(contenidoh1);
-  divPPT.appendChild(SaltoLinea);
+  divPPT.appendChild(document.createElement("br"));
   img.setAttribute("id", "imgresult");
   img.setAttribute("src", "media/duelo pptls/titulo1.png");
   divPPT.appendChild(img);
-  img.setAttribute("style", "width:300px;height:300px");
+  img.setAttribute("style", "width:min(88vw,260px);height:auto;");
 
   var imgid = document.getElementById("imgresult");
   // -----------------------------------------------------------------------------
@@ -238,7 +245,7 @@ function piedra1(eleccionJ1) {
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empatepiedra.jpeg");
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate PIEDRA");
   }
@@ -250,7 +257,7 @@ function piedra1(eleccionJ1) {
       "media/duelo pptls/resultados/papelGanaPiedra.jpeg"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
   }
@@ -262,7 +269,7 @@ function piedra1(eleccionJ1) {
       "media/duelo pptls/resultados/piedraGanaTijera.jpeg"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", ha perdido");
   }
@@ -276,7 +283,7 @@ function piedra1(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/papelGanaPiedra.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", ha perdido");
   }
@@ -284,7 +291,7 @@ function piedra1(eleccionJ1) {
   else if (selecionIA === "papel" && eleccionJ1 === "papel") {
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empatepapel.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Papel");
   }
@@ -295,7 +302,7 @@ function piedra1(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/tijeraGanaPapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
   }
@@ -309,7 +316,7 @@ function piedra1(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/piedraGanaTijera.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
   }
@@ -320,7 +327,7 @@ function piedra1(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/tijeraGanaPapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Tijera");
   }
@@ -328,7 +335,7 @@ function piedra1(eleccionJ1) {
   else if (selecionIA === "tijera" && eleccionJ1 === "tijera") {
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empatetijera.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Tijera");
   }
@@ -347,25 +354,22 @@ function piedra2(eleccionJ1) {
   console.log("La IA a seleccionado " + selecionIA);
   //declaracion de mensajes
   var img = document.createElement("img");
-  var divPPT = document.createElement("div");
+  var divPPT = getResultContainer();
   var h1 = document.createElement("h1");
-  document.body.appendChild(divPPT);
-  divPPT.setAttribute("id", "result");
-  divPPT.setAttribute(
-    "style",
-    "text-align: center; color:" + colorneonazul + ";" + "font-size:50px;"
-  );
   //------------------------------------------------------------------------------
   //Funcionamiento del juego
 
-  divPPT.appendChild(SaltoLinea);
+  divPPT.appendChild(document.createElement("br"));
   img.setAttribute("id", "imgresult");
   h1.setAttribute("id", "idh1");
   img.setAttribute("src", "media/duelo pptls/titulo1.png");
   divPPT.appendChild(img);
   divPPT.appendChild(h1);
-  img.setAttribute("style", "width:300px;height:300px");
-  h1.setAttribute("style", "color: rgb(64, 201, 219); -webkit-text-stroke-width: 3px; -webkit-text-stroke-color: rgb(255, 0, 212); background-color: rgba(0, 0, 0, 0.5);")
+  img.setAttribute("style", "width:min(88vw,260px);height:auto;");
+  h1.setAttribute(
+    "style",
+    "color: rgb(64, 201, 219); margin-top: 0.65rem; font-size: clamp(1rem, 2.4vw, 1.25rem);"
+  );
 
   var imgid = document.getElementById("imgresult");
   var h1id = document.getElementById("idh1");
@@ -376,7 +380,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empatepiedra.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     var contenidoh1 = document.createTextNode("Empate Piedra");
     divPPT.appendChild(h1);
@@ -393,7 +397,7 @@ function piedra2(eleccionJ1) {
       "media/duelo pptls/resultados/papelGanaPiedra.jpeg"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
     var contenidoh1 = document.createTextNode(
@@ -413,7 +417,7 @@ function piedra2(eleccionJ1) {
       "media/duelo pptls/resultados/piedraGanaTijera.jpeg"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", ha perdido");
     var contenidoh1 = document.createTextNode("Piedra rompe Tijera, Tu GANAS");
@@ -432,7 +436,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/papelGanaPiedra.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", ha perdido");
     var contenidoh1 = document.createTextNode(
@@ -447,7 +451,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empatepapel.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Papel");
     var contenidoh1 = document.createTextNode("Empate de Papel");
@@ -463,7 +467,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/tijeraGanaPapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
     var contenidoh1 = document.createTextNode("Tijera corta Papel, Tu PIERDES");
@@ -482,7 +486,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/piedraGanaTijera.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
     var contenidoh1 = document.createTextNode(
@@ -500,7 +504,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/tijeraGanaPapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Tijera gana a papel");
     var contenidoh1 = document.createTextNode("Tijera corta Papel, Tu GANAS");
@@ -513,7 +517,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empatetijera.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Tijera");
     var contenidoh1 = document.createTextNode("Empate Tijeras");
@@ -527,7 +531,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/spokGanaTijera.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Spock rompe Tijera, TU PIERDES");
     var contenidoh1 = document.createTextNode("Spock rompe Tijera, Tu PIERDES");
@@ -538,7 +542,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/spokGanaTijera.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Spock rompe Tijera, TU GANAS");
     var contenidoh1 = document.createTextNode("Spock rompe Tijera, Tu GANAS");
@@ -552,7 +556,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/lagartoPierdeTijera.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Tijera corta Lagarto, TU GANAS");
     var contenidoh1 = document.createTextNode(
@@ -568,7 +572,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/lagartoPierdeTijera.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Tijera corta Lagarto, TU PIERDES");
     var contenidoh1 = document.createTextNode(
@@ -586,7 +590,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/lagartoGanaPapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Lagarto se come el papel, TU GANAS");
     var contenidoh1 = document.createTextNode(
@@ -604,7 +608,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/lagartoGanaPapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Lagarto se come el papel, TU PIERDES");
     var contenidoh1 = document.createTextNode(
@@ -620,7 +624,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/spokpierdepapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Papel desautoriza a Spock, TU GANAS");
     var contenidoh1 = document.createTextNode(
@@ -636,7 +640,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/spokpierdepapel.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Papel desautoriza a Spock, TU PIERDES");
     var contenidoh1 = document.createTextNode(
@@ -649,7 +653,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/spokGanaPiedra.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Papel desautoriza a Spock, TU PIERDES");
     var contenidoh1 = document.createTextNode("Spock desintegra Piedra");
@@ -660,7 +664,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/spokGanaPiedra.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Papel desautoriza a Spock, TU GANAS");
     var contenidoh1 = document.createTextNode(
@@ -678,7 +682,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/spockPierdeLagarto.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Lagarto envenena a Spock, TU GANAS");
     var contenidoh1 = document.createTextNode(
@@ -694,7 +698,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/spockPierdeLagarto.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Lagarto envenena a Spock, TU PIERDES");
     var contenidoh1 = document.createTextNode(
@@ -712,7 +716,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/piedraGanaLagarto.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Piedra aplasta a Lagarto, TU PIERDES");
     var contenidoh1 = document.createTextNode(
@@ -728,7 +732,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/piedraGanaLagarto.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Piedra aplasta a Lagarto, TU PIERDES");
     var contenidoh1 = document.createTextNode(
@@ -744,7 +748,7 @@ function piedra2(eleccionJ1) {
       "src",
       "media/duelo pptls/resultados/piedraGanaLagarto.jpeg"
     );
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("Piedra aplasta a Lagarto, TU PIERDES");
     var contenidoh1 = document.createTextNode("Spock rompe Tijera, Tu GANAS");
@@ -755,7 +759,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empateSpock.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Spock");
     var contenidoh1 = document.createTextNode("Empate SPOCK's");
@@ -766,7 +770,7 @@ function piedra2(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/duelo pptls/resultados/empateLagarto.jpeg");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("empate Lagarto");
     var contenidoh1 = document.createTextNode("Empate Lagartos");
@@ -789,26 +793,20 @@ function CaraCruz(eleccionJ1) {
   console.log("La IA a seleccionado " + selecionIA);
   //declaracion de mensajes
   var img = document.createElement("img");
-  var divPPT = document.createElement("div");
+  var divPPT = getResultContainer();
   var h1 = document.createElement("h1");
-  document.body.appendChild(divPPT);
-  divPPT.setAttribute("id", "result");
-  divPPT.setAttribute(
-    "style",
-    "text-align: center; color:" + colorneonazul + ";" + "font-size:50px;"
-  );
   //------------------------------------------------------------------------------
   //Funcionamiento del juego
 
   
 
-  divPPT.appendChild(SaltoLinea);
+  divPPT.appendChild(document.createElement("br"));
   img.setAttribute("id", "imgresult");
   h1.setAttribute("id", "idh1");
   img.setAttribute("src", "media/caraocruz/moneda lanzada.gif");
   divPPT.appendChild(img);
   divPPT.appendChild(h1)
-  img.setAttribute("style", "width:300px;height:300px");
+  img.setAttribute("style", "width:min(88vw,260px);height:auto;");
 
   var imgid = document.getElementById("imgresult");
   var h1id = document.getElementById("idh1")
@@ -819,7 +817,7 @@ function CaraCruz(eleccionJ1) {
     h1id.parentNode.removeChild(h1id);
     imgid.parentNode.removeChild(imgid);
     img.setAttribute("src", "media/caraocruz/cara.png");
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     var contenidoh1 = document.createTextNode(`Elegiste: ${eleccionJ1}, la moneda cayo de ${selecionIA}. Has perdido`)
     divPPT.appendChild(h1)
@@ -836,7 +834,7 @@ function CaraCruz(eleccionJ1) {
       "media/caraocruz/cruz.png"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", te ha ganado");
     var contenidoh1 = document.createTextNode(`Elegiste: ${eleccionJ1}, la moneda cayo de ${selecionIA}. Has perdido`)
@@ -854,7 +852,7 @@ function CaraCruz(eleccionJ1) {
       "media/caraocruz/cara.png"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", ha perdido");
     var contenidoh1 = document.createTextNode(`Elegiste: ${eleccionJ1}, la moneda cayo de ${selecionIA}. Has ganado!!!`)
@@ -870,7 +868,7 @@ function CaraCruz(eleccionJ1) {
       "media/caraocruz/cruz.png"
     );
 
-    img.setAttribute("style", "width:300px;height:300px");
+    img.setAttribute("style", "width:min(88vw,260px);height:auto;");
     divPPT.appendChild(img);
     console.log("La IA a seleccionado " + selecionIA + ", ha perdido");
     var contenidoh1 = document.createTextNode(`Elegiste: ${eleccionJ1}, la moneda cayo de ${selecionIA}. Has Ganado!!!`)
@@ -879,3 +877,239 @@ function CaraCruz(eleccionJ1) {
     h1.setAttribute('id','idh1')
   }
 }
+
+//---------------------------------------------------------------------------------------------VAQUEROS--------------
+
+function vaqueros(eleccionJ1) {
+  console.log("El jugador 1 ha seleccionado " + eleccionJ1);
+
+  const choices = ["recarga", "disparo", "escudo"];
+  const seleccionIA = choices[Math.floor(Math.random() * choices.length)];
+  console.log("La IA ha seleccionado " + seleccionIA);
+
+  var divJuego = getResultContainer();
+  var texto = document.createElement("h1");
+  var img = document.createElement("img");
+
+  var ganaJugador =
+    (eleccionJ1 === "disparo" && seleccionIA === "recarga") ||
+    (eleccionJ1 === "recarga" && seleccionIA === "escudo") ||
+    (eleccionJ1 === "escudo" && seleccionIA === "disparo");
+
+  var mensaje = "";
+  if (eleccionJ1 === seleccionIA) {
+    mensaje = "Empate: ambos usaron " + eleccionJ1 + ".";
+  } else if (ganaJugador) {
+    mensaje = "Ganaste: " + eleccionJ1 + " vence a " + seleccionIA + ".";
+  } else {
+    mensaje = "Perdiste: " + seleccionIA + " vence a " + eleccionJ1 + ".";
+  }
+
+  texto.textContent = mensaje + " (IA: " + seleccionIA + ")";
+  texto.setAttribute(
+    "style",
+    "color: rgb(64, 201, 219); margin: 0 0 0.65rem; font-size: clamp(1rem, 2.4vw, 1.25rem);"
+  );
+  divJuego.appendChild(texto);
+
+  if (eleccionJ1 === seleccionIA) {
+    if (eleccionJ1 === "disparo") {
+      img.setAttribute("src", "media/vaqueros/disparo.gif");
+    } else if (eleccionJ1 === "recarga") {
+      img.setAttribute("src", "media/vaqueros/recarga1.jpeg");
+    } else {
+      img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
+    }
+  } else if (ganaJugador) {
+    img.setAttribute("src", "media/vaqueros/ganas.gif");
+  } else if (seleccionIA === "disparo" || eleccionJ1 === "disparo") {
+    img.setAttribute("src", "media/vaqueros/disparo2.gif");
+  } else if (seleccionIA === "recarga" || eleccionJ1 === "recarga") {
+    img.setAttribute("src", "media/vaqueros/recarga2.jpeg");
+  } else {
+    img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
+  }
+
+  img.setAttribute("style", "width:min(88vw,260px);height:auto;");
+  img.setAttribute("alt", "Resultado del duelo vaquero");
+  divJuego.appendChild(img);
+}
+
+//---------------------------------------------------------------------------------------------BLACKJACK--------------
+
+var blackjackState = {
+  deck: [],
+  player: [],
+  dealer: [],
+  isOver: false,
+  revealDealer: false,
+};
+
+function createDeck() {
+  var suits = ["H", "D", "C", "S"];
+  var ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+  var deck = [];
+
+  for (var i = 0; i < suits.length; i += 1) {
+    for (var j = 0; j < ranks.length; j += 1) {
+      deck.push({ rank: ranks[j], suit: suits[i] });
+    }
+  }
+
+  for (var k = deck.length - 1; k > 0; k -= 1) {
+    var swap = Math.floor(Math.random() * (k + 1));
+    var tmp = deck[k];
+    deck[k] = deck[swap];
+    deck[swap] = tmp;
+  }
+
+  return deck;
+}
+
+function blackjackCardValue(card) {
+  if (card.rank === "A") return 11;
+  if (card.rank === "K" || card.rank === "Q" || card.rank === "J") return 10;
+  return parseInt(card.rank, 10);
+}
+
+function blackjackScore(hand) {
+  var total = 0;
+  var aces = 0;
+
+  for (var i = 0; i < hand.length; i += 1) {
+    total += blackjackCardValue(hand[i]);
+    if (hand[i].rank === "A") aces += 1;
+  }
+
+  while (total > 21 && aces > 0) {
+    total -= 10;
+    aces -= 1;
+  }
+
+  return total;
+}
+
+function blackjackDraw(targetHand) {
+  if (!blackjackState.deck.length) blackjackState.deck = createDeck();
+  targetHand.push(blackjackState.deck.pop());
+}
+
+function blackjackCardText(card) {
+  var suitMap = { H: "♥", D: "♦", C: "♣", S: "♠" };
+  return card.rank + suitMap[card.suit];
+}
+
+function blackjackRender() {
+  var dealerCardsEl = document.getElementById("bj-dealer-cards");
+  var playerCardsEl = document.getElementById("bj-player-cards");
+  var dealerScoreEl = document.getElementById("bj-dealer-score");
+  var playerScoreEl = document.getElementById("bj-player-score");
+  if (!dealerCardsEl || !playerCardsEl || !dealerScoreEl || !playerScoreEl) return;
+
+  dealerCardsEl.innerHTML = "";
+  playerCardsEl.innerHTML = "";
+
+  for (var i = 0; i < blackjackState.dealer.length; i += 1) {
+    var dealerCard = document.createElement("div");
+    dealerCard.className = "bj-card";
+    if (i === 0 && !blackjackState.revealDealer) {
+      dealerCard.className = "bj-card hidden";
+      dealerCard.textContent = "??";
+    } else {
+      dealerCard.textContent = blackjackCardText(blackjackState.dealer[i]);
+    }
+    dealerCardsEl.appendChild(dealerCard);
+  }
+
+  for (var j = 0; j < blackjackState.player.length; j += 1) {
+    var playerCard = document.createElement("div");
+    playerCard.className = "bj-card";
+    playerCard.textContent = blackjackCardText(blackjackState.player[j]);
+    playerCardsEl.appendChild(playerCard);
+  }
+
+  var dealerVisibleScore = blackjackState.revealDealer
+    ? blackjackScore(blackjackState.dealer)
+    : blackjackScore(blackjackState.dealer.slice(1));
+
+  dealerScoreEl.textContent = String(dealerVisibleScore);
+  playerScoreEl.textContent = String(blackjackScore(blackjackState.player));
+}
+
+function blackjackSetStatus(text) {
+  var status = document.getElementById("bj-status");
+  if (status) status.textContent = text;
+}
+
+function blackjackSetControls(disabled) {
+  var hit = document.getElementById("bj-hit-btn");
+  var stand = document.getElementById("bj-stand-btn");
+  if (hit) hit.disabled = disabled;
+  if (stand) stand.disabled = disabled;
+}
+
+function blackjackFinishRound() {
+  blackjackState.isOver = true;
+  blackjackState.revealDealer = true;
+
+  while (blackjackScore(blackjackState.dealer) < 17) {
+    blackjackDraw(blackjackState.dealer);
+  }
+
+  var playerTotal = blackjackScore(blackjackState.player);
+  var dealerTotal = blackjackScore(blackjackState.dealer);
+  var message = "";
+
+  if (playerTotal > 21) {
+    message = "Te pasaste de 21. Gana la banca.";
+  } else if (dealerTotal > 21) {
+    message = "La banca se paso. Ganas tu.";
+  } else if (playerTotal > dealerTotal) {
+    message = "Ganaste con " + playerTotal + " contra " + dealerTotal + ".";
+  } else if (playerTotal < dealerTotal) {
+    message = "Perdiste con " + playerTotal + " contra " + dealerTotal + ".";
+  } else {
+    message = "Empate a " + playerTotal + ".";
+  }
+
+  blackjackRender();
+  blackjackSetStatus(message);
+  blackjackSetControls(true);
+}
+
+function blackjackNewGame() {
+  blackjackState.deck = createDeck();
+  blackjackState.player = [];
+  blackjackState.dealer = [];
+  blackjackState.isOver = false;
+  blackjackState.revealDealer = false;
+
+  blackjackDraw(blackjackState.player);
+  blackjackDraw(blackjackState.dealer);
+  blackjackDraw(blackjackState.player);
+  blackjackDraw(blackjackState.dealer);
+
+  blackjackRender();
+  blackjackSetStatus("Tu turno: pedir o parar.");
+  blackjackSetControls(false);
+
+  if (blackjackScore(blackjackState.player) === 21) {
+    blackjackFinishRound();
+  }
+}
+
+function blackjackHit() {
+  if (blackjackState.isOver) return;
+  blackjackDraw(blackjackState.player);
+  blackjackRender();
+
+  if (blackjackScore(blackjackState.player) > 21) {
+    blackjackFinishRound();
+  }
+}
+
+function blackjackStand() {
+  if (blackjackState.isOver) return;
+  blackjackFinishRound();
+}
+

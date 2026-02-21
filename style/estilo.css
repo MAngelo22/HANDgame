@@ -1,144 +1,364 @@
-/* Reset del margen y padding */
-nav {
-    margin: 0;
-    padding: 0;
+@font-face {
+    font-family: "Arcade";
+    src: url("../fonts/ARCADE_N.TTF") format("truetype");
+    font-display: swap;
 }
 
-.container {
-    margin: 0;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
+@font-face {
+    font-family: "Neon";
+    src: url("../fonts/neonavy.ttf") format("truetype");
+    font-display: swap;
 }
 
-/* Estilos para fieldset */
-fieldset {
-    margin: 0;
-    padding: 10px;
+:root {
+    --bg: #0b1119;
+    --card: rgba(10, 17, 28, 0.78);
+    --card-border: rgba(64, 201, 219, 0.45);
+    --text: #ecf4ff;
+    --primary: #40c9db;
+    --accent: #ff00d4;
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    --radius: 16px;
 }
 
-/* Navegación */
-.nav-bar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    flex-direction: column; /* Cambiado a columna para móviles */
-    align-items: center; /* Centrar elementos */
-}
-
-.nav-bar .logo {
-    display: flex;
-    flex-direction: column; /* Apilar logo y título */
-    align-items: center; /* Centrar contenido */
-}
-
-/* Estilos para los elementos de la barra de navegación */
-.nav-bar li {
-    margin: 5px; /* Espacio entre elementos */
-}
-
-.nav-bar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-.nav-bar li a:hover {
-    background-color: #111;
-}
-
-/* Efecto hover */
-.navbar a:hover {
-    color: rgb(255, 255, 255);
-}
-
-.navbar h1 {
-    text-align: center;
-    padding: 30px 20px;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 body {
-    background-image: url(../media/arcade.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat; /* Cambiado a no-repeat */
-    background-position: center center;
-    background-attachment: fixed;
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: "Neon", "Segoe UI", sans-serif;
+    background:
+        linear-gradient(135deg, rgba(5, 11, 20, 0.86), rgba(26, 8, 29, 0.72)),
+        url("../media/arcade.jpeg") center/cover fixed no-repeat;
 }
 
-h2 {
-    color: rgb(255, 0, 212);
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
+h1,
+h2,
 h3 {
-    color: rgb(255, 0, 212);
+    margin: 0;
+    text-align: center;
 }
 
 h1 {
-    color: rgb(64, 201, 219);
+    color: var(--primary);
+    font-family: "Arcade", "Neon", sans-serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    letter-spacing: 1px;
+}
+
+h2,
+h3 {
+    color: var(--accent);
+    line-height: 1.4;
+}
+
+.page {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+#navbar,
+.navbar {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto 0.5rem;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo .centered-image {
+    width: clamp(88px, 12vw, 140px);
+    height: clamp(88px, 12vw, 140px);
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.45));
+}
+
+.panel {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1rem, 2.5vw, 1.6rem);
+    margin: 1rem auto;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    width: min(980px, 100%);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    background: rgba(4, 9, 18, 0.6);
+}
+
+legend {
+    color: var(--primary);
+    font-weight: 700;
+    padding: 0 0.5rem;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 0.6rem;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    text-align: center;
+    padding: 0.65rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+.game-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.info-block p,
+.info-block ul {
+    margin: 0.4rem 0;
+    line-height: 1.4;
+}
+
+.info-block ul {
+    text-align: left;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.choice-button {
+    width: clamp(82px, 21vw, 132px);
+    height: clamp(82px, 21vw, 132px);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.choice-button:hover {
+    transform: scale(1.03);
+    border-color: var(--primary);
 }
 
 button {
-    font-size: medium; 
-    font-weight: bold; 
-    font-family: "../fonts/neonavy.ttf";
-    background-color: rgb(255, 0, 212); 
-    color: aqua;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "Neon", "Segoe UI", sans-serif;
+    color: #e8ffff;
+    background: linear-gradient(90deg, #c100a2, #4d00ff);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
 }
 
-/* Estilos para las opciones del juego */
-.game-options {
-    display: flex; /* Usar flexbox para las opciones del juego */
-    flex-wrap: wrap; /* Permitir que las imágenes se envuelvan */
-    justify-content: center; /* Centrar elementos */
-    padding: 0; /* Quitar padding */
+#result {
+    width: min(94vw, 720px);
+    margin: 1rem auto;
+    padding: 1rem;
+    text-align: center;
+    border-radius: var(--radius);
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.game-options li {
-    display: flex; /* Cambiar a flex para alineación */
-    flex-direction: column; /* Apilar íconos verticalmente */
-    align-items: center; /* Centrar imágenes */
-    margin: 10px; /* Espacio entre las opciones */
+#result p,
+#result h1 {
+    margin: 0 0 0.7rem;
+    font-size: clamp(0.95rem, 2.3vw, 1.15rem);
+    line-height: 1.35;
 }
 
-/* Media queries para hacer el menú responsive */
-@media (max-width: 768px) {
-    .nav-bar {
-        flex-direction: column; /* Mantener en columna */
-        align-items: center; /* Centrar los elementos en la columna */
-    }
-
-    .nav-bar li {
-        width: 100%; /* Cada elemento de la lista ocupa el ancho completo */
-        margin: 5px 0; /* Espacio vertical entre elementos */
-    }
-
-    .nav-bar li a {
-        padding: 12px; /* Reduce el padding en pantallas más pequeñas */
-        width: 100%; /* Botones ocupan el ancho completo */
-        text-align: center; /* Alinear texto al centro */
-    }
-
-    .game-options {
-        flex-direction: column; /* Coloca las opciones del juego en columna */
-        align-items: center; /* Centra las imágenes */
-    }
+#result img {
+    max-width: min(88vw, 260px);
+    height: auto;
+    border-radius: 12px;
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 24px; /* Reduce el tamaño del encabezado en pantallas pequeñas */
+.placeholder {
+    text-align: center;
+}
+
+.placeholder p {
+    margin-top: 0.8rem;
+    opacity: 0.9;
+}
+
+.home-cta {
+    margin-top: 0.9rem;
+    text-align: center;
+}
+
+.home-button {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e8ffff;
+    background: linear-gradient(90deg, #004d8b, #1f7bcf);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 10px;
+    padding: 0.55rem 0.95rem;
+}
+
+.bj-table {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.bj-row {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.7rem;
+}
+
+.bj-row h3 {
+    margin: 0 0 0.45rem;
+    color: #ffd27a;
+}
+
+.bj-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    min-height: 54px;
+}
+
+.bj-card {
+    min-width: 44px;
+    padding: 0.5rem 0.45rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    color: #101828;
+    background: #f4f7ff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.bj-card.hidden {
+    color: #f4f7ff;
+    background: #244174;
+}
+
+.bj-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.bj-status {
+    margin: 0;
+    text-align: center;
+    color: #bdefff;
+}
+
+.vaq-hud {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+}
+
+.vaq-side {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 0.55rem;
+    text-align: center;
+}
+
+.vaq-side h3 {
+    margin: 0 0 0.35rem;
+    color: #ffd27a;
+}
+
+.vaq-side p {
+    margin: 0 0 0.35rem;
+}
+
+.ammo-indicator {
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    min-height: 1.3rem;
+}
+
+.ammo-loaded {
+    color: #9cf59e;
+    font-weight: 700;
+}
+
+.ammo-empty {
+    color: #ffaaaa;
+    font-weight: 700;
+}
+
+@media (max-width: 680px) {
+    .panel {
+        padding: 0.9rem;
     }
 
-    h2, h3 {
-        font-size: 18px; /* Reduce el tamaño de los subtítulos */
+    .game-card img {
+        width: 80px;
+        height: 80px;
     }
 
-    button {
-        font-size: small; /* Reduce el tamaño del botón */
+    .info-block ul {
+        padding-left: 1.1rem;
+    }
+
+    .actions {
+        gap: 0.45rem;
+    }
+
+    .vaq-hud {
+        grid-template-columns: 1fr;
     }
 }
