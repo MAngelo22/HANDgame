@@ -13,7 +13,9 @@
     restart: document.getElementById("restart"),
     history: document.getElementById("history"),
     token: document.getElementById("token"),
-    boardStatus: document.getElementById("board-status")
+    boardStatus: document.getElementById("board-status"),
+    treasure: document.getElementById("treasure"),
+    sceneFx: document.getElementById("scene-fx")
   };
 
   var state = {
@@ -78,6 +80,54 @@
   function setAnswersEnabled(enabled) {
     var buttons = ui.answers.querySelectorAll("button");
     buttons.forEach(function (btn) { btn.disabled = !enabled; });
+  }
+
+  function playSfx(kind) {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    var ctx = new Ctx();
+
+    function tone(freq, duration, when, gain, type) {
+      var osc = ctx.createOscillator();
+      var amp = ctx.createGain();
+      osc.type = type || "triangle";
+      osc.frequency.value = freq;
+      amp.gain.value = gain || 0.05;
+      amp.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + when + duration);
+      osc.connect(amp).connect(ctx.destination);
+      osc.start(ctx.currentTime + when);
+      osc.stop(ctx.currentTime + when + duration);
+    }
+
+    if (kind === "splash") {
+      tone(180, 0.15, 0, 0.07, "sawtooth");
+      tone(120, 0.28, 0.08, 0.06, "sawtooth");
+      tone(90, 0.2, 0.2, 0.05, "triangle");
+    } else if (kind === "treasure") {
+      tone(523.25, 0.1, 0, 0.06, "triangle");
+      tone(659.25, 0.12, 0.09, 0.06, "triangle");
+      tone(783.99, 0.15, 0.2, 0.055, "triangle");
+    }
+  }
+
+  function triggerSharkFallFx() {
+    if (!ui.sceneFx) return;
+    ui.sceneFx.innerHTML = "";
+    var burst = document.createElement("div");
+    burst.className = "splash-burst";
+    burst.textContent = "💦🦈💦";
+    ui.sceneFx.appendChild(burst);
+    playSfx("splash");
+    window.setTimeout(function () { ui.sceneFx.innerHTML = ""; }, 980);
+  }
+
+  function triggerTreasureFx() {
+    if (ui.treasure) {
+      ui.treasure.classList.remove("win");
+      void ui.treasure.offsetWidth;
+      ui.treasure.classList.add("win");
+    }
+    playSfx("treasure");
   }
 
   function renderProgress() {
@@ -160,6 +210,7 @@
       ui.phase.textContent = "Derrota: caes del tablon directo a los tiburones.";
       ui.nextRound.disabled = true;
       setAnswersEnabled(false);
+      triggerSharkFallFx();
       return true;
     }
 
@@ -168,6 +219,7 @@
       ui.phase.textContent = "Victoria: llegaste al tesoro del club secreto.";
       ui.nextRound.disabled = true;
       setAnswersEnabled(false);
+      triggerTreasureFx();
       return true;
     }
 
@@ -223,6 +275,8 @@
     renderProgress();
     ui.history.innerHTML = "";
     ui.nextRound.disabled = true;
+    if (ui.sceneFx) ui.sceneFx.innerHTML = "";
+    if (ui.treasure) ui.treasure.classList.remove("win");
     beginRound();
   }
 
