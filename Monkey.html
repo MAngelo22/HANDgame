@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -27,9 +27,19 @@
                     <div class="pirate pirate-a"></div>
                     <div class="pirate pirate-b"></div>
                 </div>
+
+                <div class="plank-area">
+                    <div class="sharks">🦈 🦈</div>
+                    <div class="plank-track">
+                        <div id="token" class="token">🏴‍☠️</div>
+                        <div class="treasure">💰</div>
+                    </div>
+                    <p id="board-status" class="board-status">Posicion actual: 0</p>
+                </div>
+
                 <p class="scene-text">
-                    Bruma te ense�a dos gestos. El truco del club es absurdo: el valor real del segundo gesto
-                    siempre es el numero de dedos del primer gesto.
+                    Bruma te enseña dos gestos por ronda. Si aciertas avanzas por el tablon; si fallas retrocedes.
+                    Llega al tesoro antes de caer con los tiburones.
                 </p>
             </section>
 
@@ -49,7 +59,7 @@
                 </div>
 
                 <div id="question-box" class="question-box hidden">
-                    <p>�Que valor tiene el gesto 2?</p>
+                    <p>¿Que valor tiene el gesto 2?</p>
                     <div id="answers" class="answers"></div>
                 </div>
 

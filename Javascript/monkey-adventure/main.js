@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   var ui = {
     round: document.getElementById("round"),
     score: document.getElementById("score"),
@@ -11,18 +11,22 @@
     feedback: document.getElementById("feedback"),
     nextRound: document.getElementById("next-round"),
     restart: document.getElementById("restart"),
-    history: document.getElementById("history")
+    history: document.getElementById("history"),
+    token: document.getElementById("token"),
+    boardStatus: document.getElementById("board-status")
   };
 
   var state = {
     round: 1,
     score: 0,
     streak: 0,
+    progress: 0,
     firstValue: 1,
     secondValue: 1,
     firstPattern: [],
     secondPattern: [],
     waitingAnswer: false,
+    gameOver: false,
     history: []
   };
 
@@ -76,6 +80,22 @@
     buttons.forEach(function (btn) { btn.disabled = !enabled; });
   }
 
+  function renderProgress() {
+    var minPos = -2;
+    var maxPos = 5;
+    var ratio = (state.progress - minPos) / (maxPos - minPos);
+    var leftPercent = 8 + ratio * 82;
+    ui.token.style.left = leftPercent + "%";
+
+    if (state.progress <= -2) {
+      ui.boardStatus.textContent = "Has caido al agua con tiburones.";
+    } else if (state.progress >= 5) {
+      ui.boardStatus.textContent = "Has alcanzado el tesoro del club.";
+    } else {
+      ui.boardStatus.textContent = "Posicion actual: " + state.progress;
+    }
+  }
+
   function buildAnswers() {
     ui.answers.innerHTML = "";
     for (var value = 1; value <= 5; value += 1) {
@@ -105,6 +125,8 @@
   }
 
   function beginRound() {
+    if (state.gameOver) return;
+
     state.firstValue = randomInt(1, 5);
     state.secondValue = randomInt(1, 5);
     state.firstPattern = samplePattern(state.firstValue);
@@ -122,6 +144,7 @@
     renderHand(ui.handTwo, [1, 2, 3, 4, 5]);
 
     window.setTimeout(function () {
+      if (state.gameOver) return;
       ui.phase.textContent = "Ahora mira el segundo gesto y responde.";
       renderHand(ui.handTwo, state.secondPattern);
       ui.handTwo.classList.remove("hidden-hand");
@@ -131,8 +154,28 @@
     }, 1500);
   }
 
+  function endByProgress() {
+    if (state.progress <= -2) {
+      state.gameOver = true;
+      ui.phase.textContent = "Derrota: caes del tablon directo a los tiburones.";
+      ui.nextRound.disabled = true;
+      setAnswersEnabled(false);
+      return true;
+    }
+
+    if (state.progress >= 5) {
+      state.gameOver = true;
+      ui.phase.textContent = "Victoria: llegaste al tesoro del club secreto.";
+      ui.nextRound.disabled = true;
+      setAnswersEnabled(false);
+      return true;
+    }
+
+    return false;
+  }
+
   function resolveAnswer(choice, button) {
-    if (!state.waitingAnswer) return;
+    if (!state.waitingAnswer || state.gameOver) return;
 
     state.waitingAnswer = false;
     setAnswersEnabled(false);
@@ -144,21 +187,26 @@
     if (correct) {
       state.score += 1;
       state.streak += 1;
+      state.progress += 1;
       button.classList.add("active-ok");
-      setFeedback("Correcto. El valor real era " + expected + " (el del primer gesto).", true);
-      writeHistory("R" + state.round + ": acertaste. G1=" + state.firstValue + " / G2 visual=" + state.secondValue);
+      setFeedback("Acertaste. Avanzas un paso por el tablon.", true);
+      writeHistory("R" + state.round + ": acierto, avanzas a " + state.progress + ".");
     } else {
       state.streak = 0;
+      state.progress -= 1;
       button.classList.add("active-ko");
-      setFeedback("Fallaste. Aunque G2 parecia " + state.secondValue + ", su valor era " + expected + ".", false);
-      writeHistory("R" + state.round + ": fallo. Elegiste " + choice + ", valor real " + expected + ".");
+      setFeedback("Fallaste. Retrocedes un paso.", false);
+      writeHistory("R" + state.round + ": fallo, retrocedes a " + state.progress + ".");
     }
 
-    ui.phase.textContent = "Regla secreta: el segundo gesto vale lo que mostraba el primero.";
+    ui.phase.textContent = "Preparate para la siguiente ronda.";
     setStats();
+    renderProgress();
+    endByProgress();
   }
 
   function nextRound() {
+    if (state.gameOver) return;
     state.round += 1;
     setStats();
     beginRound();
@@ -168,9 +216,13 @@
     state.round = 1;
     state.score = 0;
     state.streak = 0;
+    state.progress = 0;
     state.history = [];
+    state.gameOver = false;
     setStats();
+    renderProgress();
     ui.history.innerHTML = "";
+    ui.nextRound.disabled = true;
     beginRound();
   }
 
@@ -179,5 +231,6 @@
 
   buildAnswers();
   setStats();
+  renderProgress();
   beginRound();
 })();
