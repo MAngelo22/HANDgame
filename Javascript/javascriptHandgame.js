@@ -880,59 +880,146 @@ function CaraCruz(eleccionJ1) {
 
 //---------------------------------------------------------------------------------------------VAQUEROS--------------
 
+var vaquerosState = {
+  playerLoaded: false,
+  aiLoaded: false,
+  playerScore: 0,
+  aiScore: 0,
+  turn: 1,
+};
+
+function vaquerosChooseAI() {
+  var roll = Math.random();
+  if (vaquerosState.aiLoaded) {
+    if (roll < 0.45) return "disparo";
+    if (roll < 0.8) return "escudo";
+    return "recarga";
+  }
+  if (roll < 0.6) return "recarga";
+  return "escudo";
+}
+
+function vaquerosRenderHud() {
+  var playerAmmo = document.getElementById("vaq-player-ammo");
+  var aiAmmo = document.getElementById("vaq-ai-ammo");
+  var playerScore = document.getElementById("vaq-player-score");
+  var aiScore = document.getElementById("vaq-ai-score");
+  var shootBtn = document.getElementById("vaq-shoot-btn");
+
+  if (playerAmmo) {
+    playerAmmo.innerHTML = vaquerosState.playerLoaded
+      ? '<span class="ammo-loaded">● Bala cargada</span>'
+      : '<span class="ammo-empty">◌ Bala vacia</span>';
+  }
+  if (aiAmmo) {
+    aiAmmo.innerHTML = vaquerosState.aiLoaded
+      ? '<span class="ammo-loaded">● Bala cargada</span>'
+      : '<span class="ammo-empty">◌ Bala vacia</span>';
+  }
+  if (playerScore) playerScore.textContent = String(vaquerosState.playerScore);
+  if (aiScore) aiScore.textContent = String(vaquerosState.aiScore);
+  if (shootBtn) shootBtn.disabled = !vaquerosState.playerLoaded;
+}
+
+function vaquerosSetStatus(text) {
+  var status = document.getElementById("vaq-status");
+  if (status) status.textContent = text;
+}
+
+function resetVaqueros() {
+  vaquerosState.playerLoaded = false;
+  vaquerosState.aiLoaded = false;
+  vaquerosState.playerScore = 0;
+  vaquerosState.aiScore = 0;
+  vaquerosState.turn = 1;
+  vaquerosRenderHud();
+  vaquerosSetStatus("Armas descargadas. Recarga para poder disparar.");
+  var result = document.getElementById("result");
+  if (result) result.innerHTML = "";
+}
+
 function vaqueros(eleccionJ1) {
-  console.log("El jugador 1 ha seleccionado " + eleccionJ1);
+  if (eleccionJ1 === "disparo" && !vaquerosState.playerLoaded) {
+    vaquerosSetStatus("No puedes disparar: tienes la bala vacia. Recarga primero.");
+    vaquerosRenderHud();
+    return;
+  }
 
-  const choices = ["recarga", "disparo", "escudo"];
-  const seleccionIA = choices[Math.floor(Math.random() * choices.length)];
-  console.log("La IA ha seleccionado " + seleccionIA);
-
+  var seleccionIA = vaquerosChooseAI();
+  var playerCanShoot = eleccionJ1 === "disparo" && vaquerosState.playerLoaded;
+  var aiCanShoot = seleccionIA === "disparo" && vaquerosState.aiLoaded;
+  var nextPlayerLoaded = vaquerosState.playerLoaded;
+  var nextAiLoaded = vaquerosState.aiLoaded;
   var divJuego = getResultContainer();
   var texto = document.createElement("h1");
   var img = document.createElement("img");
-
-  var ganaJugador =
-    (eleccionJ1 === "disparo" && seleccionIA === "recarga") ||
-    (eleccionJ1 === "recarga" && seleccionIA === "escudo") ||
-    (eleccionJ1 === "escudo" && seleccionIA === "disparo");
-
   var mensaje = "";
-  if (eleccionJ1 === seleccionIA) {
-    mensaje = "Empate: ambos usaron " + eleccionJ1 + ".";
-  } else if (ganaJugador) {
-    mensaje = "Ganaste: " + eleccionJ1 + " vence a " + seleccionIA + ".";
+  var hit = false;
+
+  if (eleccionJ1 === "recarga") nextPlayerLoaded = true;
+  if (playerCanShoot) nextPlayerLoaded = false;
+  if (seleccionIA === "recarga") nextAiLoaded = true;
+  if (aiCanShoot) nextAiLoaded = false;
+
+  if (playerCanShoot && aiCanShoot) {
+    mensaje = "Empate: ambos dispararon a la vez.";
+    img.setAttribute("src", "media/vaqueros/disparo2.gif");
+  } else if (playerCanShoot && seleccionIA === "escudo") {
+    mensaje = "La IA bloqueo tu disparo con escudo. Tu arma quedo vacia.";
+    img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
+  } else if (aiCanShoot && eleccionJ1 === "escudo") {
+    mensaje = "Bloqueaste el disparo de la IA con tu escudo.";
+    img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
+  } else if (playerCanShoot && seleccionIA === "recarga") {
+    mensaje = "Impacto directo: disparaste mientras la IA recargaba.";
+    vaquerosState.playerScore += 1;
+    hit = true;
+    img.setAttribute("src", "media/vaqueros/ganas.gif");
+  } else if (aiCanShoot && eleccionJ1 === "recarga") {
+    mensaje = "La IA te disparo mientras recargabas.";
+    vaquerosState.aiScore += 1;
+    hit = true;
+    img.setAttribute("src", "media/vaqueros/disparo2.gif");
+  } else if (eleccionJ1 === "recarga" && seleccionIA === "recarga") {
+    mensaje = "Ambos recargan. Los dos tienen bala lista.";
+    img.setAttribute("src", "media/vaqueros/recarga2.jpeg");
+  } else if (eleccionJ1 === "recarga" || seleccionIA === "recarga") {
+    mensaje = "Uno recarga y el otro se protege.";
+    img.setAttribute("src", "media/vaqueros/recarga1.jpeg");
   } else {
-    mensaje = "Perdiste: " + seleccionIA + " vence a " + eleccionJ1 + ".";
+    mensaje = "Ambos se protegen. Sin cambios en este turno.";
+    img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
   }
 
-  texto.textContent = mensaje + " (IA: " + seleccionIA + ")";
+  if (hit) {
+    nextPlayerLoaded = false;
+    nextAiLoaded = false;
+    vaquerosState.turn += 1;
+    mensaje += " Nueva ronda: ambos empiezan con bala vacia.";
+  }
+
+  vaquerosState.playerLoaded = nextPlayerLoaded;
+  vaquerosState.aiLoaded = nextAiLoaded;
+
+  texto.textContent = mensaje + " (IA eligio: " + seleccionIA + ")";
   texto.setAttribute(
     "style",
     "color: rgb(64, 201, 219); margin: 0 0 0.65rem; font-size: clamp(1rem, 2.4vw, 1.25rem);"
   );
   divJuego.appendChild(texto);
-
-  if (eleccionJ1 === seleccionIA) {
-    if (eleccionJ1 === "disparo") {
-      img.setAttribute("src", "media/vaqueros/disparo.gif");
-    } else if (eleccionJ1 === "recarga") {
-      img.setAttribute("src", "media/vaqueros/recarga1.jpeg");
-    } else {
-      img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
-    }
-  } else if (ganaJugador) {
-    img.setAttribute("src", "media/vaqueros/ganas.gif");
-  } else if (seleccionIA === "disparo" || eleccionJ1 === "disparo") {
-    img.setAttribute("src", "media/vaqueros/disparo2.gif");
-  } else if (seleccionIA === "recarga" || eleccionJ1 === "recarga") {
-    img.setAttribute("src", "media/vaqueros/recarga2.jpeg");
-  } else {
-    img.setAttribute("src", "media/vaqueros/escudo1.jpeg");
-  }
-
   img.setAttribute("style", "width:min(88vw,260px);height:auto;");
   img.setAttribute("alt", "Resultado del duelo vaquero");
   divJuego.appendChild(img);
+
+  vaquerosRenderHud();
+  vaquerosSetStatus(
+    "Turno " +
+      vaquerosState.turn +
+      " | Municion jugador: " +
+      (vaquerosState.playerLoaded ? "cargada" : "vacia") +
+      " | Municion IA: " +
+      (vaquerosState.aiLoaded ? "cargada" : "vacia")
+  );
 }
 
 //---------------------------------------------------------------------------------------------BLACKJACK--------------
