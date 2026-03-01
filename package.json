@@ -1,0 +1,11 @@
+{
+  "name": "handgame",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "serve -l 5500 ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.5"
+  }
+}

@@ -254,7 +254,7 @@ function piedra2(eleccionJ1){
       img.setAttribute("style", "width:300px;height:300px");
       divPPT.appendChild(img);
       console.log("Lagarto se come el papel, TU PIERDES");
-      var contenidoh1 = document.createTextNode("Lagarto se come Papel, Tu GANAS")
+      var contenidoh1 = document.createTextNode("Lagarto se come Papel, TU PIERDES")
       divPPT.appendChild(h1)
       h1.appendChild(contenidoh1);
       h1.setAttribute('id','idh1')
